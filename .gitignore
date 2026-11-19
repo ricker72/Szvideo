@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Build / dist
+dist/
+build/
+*.exe
+*.dmg
+*.AppImage
+
+# Logs & OS
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Env / secrets
+.env
+.env.*
+
+# Electron
+*.asar
+
+# Temp / backup
+*.tmp
+app_backup.js
+write_files.ps1
+
+# Test artifacts
+coverage/

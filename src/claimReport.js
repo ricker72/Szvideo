@@ -1,0 +1,4 @@
+export function buildClaimReport({ caseRecord, comparison = null, claimant = '', statement = '', project = null }) {
+  if (!caseRecord?.original?.sha256) throw new Error('A verified original is required');
+  return { schema: 'szvideo-copyright-report/v1', generatedAt: new Date().toISOString(), claimant, statement: statement || 'I declare that the attached original is my source file and that this report preserves its technical evidence.', original: caseRecord.original, media: caseRecord.media || null, integrity: caseRecord.integrity || null, perceptual: caseRecord.perceptual || null, comparison, history: caseRecord.history || [], project: project ? { name: project.name, fps: project.fps, tracks: project.tracks, markers: project.markers } : null, provenance: caseRecord.provenance || 'Created with SzVideo' };
+}

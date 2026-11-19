@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SzVideo — Editor y expediente de autoría</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <span class="logo-icon">🎬</span>
+      <span class="logo-text">SzVideo</span>
+    </div>
+    <nav class="nav">
+      <button class="nav-btn active" data-view="editor">Editor</button>
+      <button class="nav-btn" data-view="analyze">Analyze</button>
+      <button class="nav-btn" data-view="settings">Settings</button>
+    </nav>
+  </header>
+
+  <main id="editor-view" class="view active">
+    <div class="drop-zone" id="dropZone">
+      <div class="drop-zone-content">
+        <div class="drop-icon">📁</div>
+        <h2>Drop a video file here</h2>
+        <p>or click to browse<br>MP4, WebM, AVI, MOV · procesamiento local</p>
+        <input type="file" id="fileInput" accept="video/*" hidden>
+        <button class="btn-primary" id="desktopOpenBtn" type="button">Abrir vídeo local</button>
+        <button class="btn-primary" id="saveCaseBtn" type="button">Guardar expediente</button>
+      </div>
+    </div>
+
+    <div class="editor-stage">
+      <canvas id="previewCanvas"></canvas>
+      <video id="sourceVideo" class="hidden" playsinline></video>
+    </div>
+
+    <div class="control-panel">
+      <div class="control-section">
+        <h3>Protección de autoría</h3>
+        <p>La aplicación conserva el original, su SHA-256, huella perceptual y expediente de evidencia. Los controles de reproducción, proxy y exportación aparecen después de cargar un vídeo.</p>
+      </div>
+    </div>
+  </main>
+
+  <main id="analyze-view" class="view">
+    <div class="panel">
+      <h2>Content Analysis</h2>
+      <p class="hint">Run analysis on a video to see the signals TikTok-style detection would measure.</p>
+      <div class="control-group full-width">
+        <label class="control-group">
+          <span>Upload Video</span>
+          <input type="file" id="analyzeFileInput" accept="video/*" hidden>
+          <button class="btn-primary" id="analyzeBtn">Analyze Video</button>
+          <small>or drag a video file onto the editor</small>
+        </label>
+      </div>
+      <div class="analysis-results" id="analysisResults"></div>
+    </div>
+  </main>
+
+  <main id="settings-view" class="view">
+    <div class="panel">
+      <h2>Settings</h2>
+      <div class="setting-item">
+        <label>Default Export Format</label>
+        <select id="defaultFormat">
+          <option value="mp4">MP4 (H.264)</option>
+          <option value="webm">WebM (VP9)</option>
+          <option value="gif">GIF</option>
+        </select>
+      </div>
+      <div class="setting-item">
+        <label>Default Resolution</label>
+        <select id="defaultResolution">
+          <option value="1080">1080p (1920×1080)</option>
+          <option value="720" selected>720p (1280×720)</option>
+          <option value="480">480p (854×480)</option>
+        </select>
+      </div>
+      <div class="setting-item">
+        <label>Fallback Export Preset</label>
+        <select id="fallbackPreset">
+          <option value="high">High quality</option>
+          <option value="balanced" selected>Balanced</option>
+          <option value="low">Low size</option>
+        </select>
+      </div>
+      <div class="setting-item">
+        <label class="checkbox-label">
+          <input type="checkbox" id="keepOriginal">
+          Keep original file after export
+        </label>
+      </div>
+    </div>
+  </main>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script type="module" src="../src/analyzer.js"></script>
+  <script type="module" src="../src/protector.js"></script>
+  <script type="module" src="../src/exporter.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

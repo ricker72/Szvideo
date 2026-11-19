@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SzVideo — Editor de vídeo con capa protectora de autoría</title>
+  <meta name="description" content="Editor de vídeo local con parche NoBlur para TikTok, preset legal compatible con TikTok Studio y expediente de autoría. Todo el procesamiento en tu PC.">
+  <style>
+    :root { --bg: #0b1120; --bg2: #0f172a; --border: #334155; --text: #e2e8f0; --muted: #94a3b8; --cyan: #67e8f9; --purple: #d8b4fe; --green: #86efac; --orange: #fdba74; }
+    * { box-sizing: border-box; margin: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    header { text-align: center; padding: 64px 24px 40px; }
+    h1 { font-size: 2.6rem; }
+    h1 span { color: var(--cyan); }
+    .tagline { color: var(--muted); font-size: 1.1rem; max-width: 720px; margin: 12px auto 28px; }
+    .cta { display: inline-block; background: linear-gradient(135deg, #06b6d4, #a855f7); color: #04121f; font-weight: 700; padding: 14px 32px; border-radius: 12px; text-decoration: none; font-size: 1.05rem; }
+    .cta:hover { filter: brightness(1.1); }
+    .note { color: var(--muted); font-size: .85rem; margin-top: 14px; }
+    main { max-width: 1020px; margin: 0 auto; padding: 24px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+    .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+    .card h2 { font-size: 1.05rem; margin-bottom: 8px; }
+    .card.cyan h2 { color: var(--cyan); } .card.purple h2 { color: var(--purple); }
+    .card.green h2 { color: var(--green); } .card.orange h2 { color: var(--orange); }
+    .card p { color: var(--muted); font-size: .92rem; }
+    section.alert { max-width: 1020px; margin: 8px auto 48px; padding: 0 24px; }
+    .alert .card { border-color: #f59e0b; }
+    .alert h2 { color: var(--orange); }
+    footer { text-align: center; color: var(--muted); padding: 40px 24px; font-size: .85rem; }
+    footer a { color: var(--cyan); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎬 Sz<span>Video</span></h1>
+    <p class="tagline">Editor de vídeo de escritorio con capa protectora de autoría: parche de contenedor <strong>NoBlur</strong> para TikTok, preset legal compatible con <strong>TikTok Studio</strong>, limpieza de metadatos y expediente forense de autoría.</p>
+    <a class="cta" href="https://github.com/TU-USUARIO/SzVideo/releases" rel="noopener">Descargar para Windows</a>
+    <p class="note">Portable e instalador · todo el procesamiento es local: tus vídeos nunca salen de tu PC</p>
+  </header>
+
+  <main>
+    <div class="grid">
+      <div class="card purple"><h2>Parche NoBlur sin re-encode</h2><p>Reordena el contenedor MP4 (moov antes de mdat), marca isom e infla la tabla de muestras ×2–×20 con muestras dummy por códec. La calidad se conserva al 100 % y el parche tarda segundos.</p></div>
+      <div class="card green"><h2>Preset legal · TikTok Studio</h2><p>Obfuscación autoral sutil + codificación exacta que espera la subida web: H.264 High, yuv420p, AAC y faststart. Validación automática de duración, tamaño y resolución antes de subir.</p></div>
+      <div class="card cyan"><h2>Expediente de autoría</h2><p>SHA-256 del original, huella perceptual comparada ante 6 ataques (Hamming), historia de transformaciones y prueba de robustez forense de tu propia firma.</p></div>
+      <div class="card orange"><h2>Salud de publicación</h2><p>Chequeo previo de los factores documentados que mandan un vídeo a «Solo yo»: audio con copyright, etiqueta de contenido IA, control de audiencia y re-subidas.</p></div>
+      <div class="card cyan"><h2>Director heurístico local</h2><p>Motor determinista (sin IA externa) que clasifica el contenido y planifica clips estilo TikTok de ≤ 180 s con presets adaptativos.</p></div>
+      <div class="card purple"><h2>Edición real</h2><p>Timeline con cortes y marcadores, cola de reproducción, proxy para previsualizar rápido y exportación controlada con progreso y cancelación.</p></div>
+    </div>
+  </main>
+
+  <section class="alert">
+    <div class="card">
+      <h2>⚠️ Esta página es una presentación</h2>
+      <p>SzVideo es una aplicación de escritorio: el procesamiento de vídeo (FFmpeg, parcheo de contenedor, exportación) se ejecuta en tu PC y <strong>no puede funcionar en un hosting estático</strong> como GitHub Pages. Descarga el ejecutable desde Releases. Diseñada para autores de contenido propio — respeta los Términos de Servicio de cada plataforma.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>SzVideo · Licencia MIT · <a href="https://github.com/TU-USUARIO/SzVideo">Código fuente</a></p>
+  </footer>
+</body>
+</html>

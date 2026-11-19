@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SzVideo — NoBlur + Salud de publicación (local)</title>
+  <meta name="description" content="Parche NoBlur para TikTok y chequeo de Salud de publicación. Todo corre en tu navegador: el vídeo nunca se sube a ningún servidor.">
+  <meta name="theme-color" content="#0b1120">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <span class="logo">🎬</span>
+      <div>
+        <h1>Sz<span>Video</span></h1>
+        <p class="tag">Herramientas 100 % locales · navegador</p>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-tab="noblur" role="tab" aria-selected="true">Parche NoBlur</button>
+      <button class="tab" data-tab="salud" role="tab" aria-selected="false">Salud de publicación</button>
+      <button class="tab" data-tab="info" role="tab" aria-selected="false">Sobre SzVideo</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===== TAB: NoBlur ===== -->
+    <section id="panel-noblur" class="panel active" role="tabpanel">
+      <div class="card">
+        <h2>Parche NoBlur <span class="badge">sin re-encode</span></h2>
+        <p class="lead">Infla la tabla de muestras del contenedor MP4/MOV. TikTok suele saltarse la recompresión agresiva y tu vídeo llega con calidad 100 % original. Todo ocurre <strong>en tu navegador</strong>.</p>
+
+        <div class="drop" id="drop" role="button" tabindex="0" aria-label="Suelta aquí tus vídeos">
+          <div class="drop-icon">📁</div>
+          <div>Suelta uno o varios vídeos aquí o <strong>haz clic para elegirlos</strong></div>
+          <div class="muted small">MP4 / MOV / M4V · cola secuencial · ~1,5 GB por archivo (para más usa la app de escritorio)</div>
+          <input type="file" id="fileInput" accept="video/mp4,video/quicktime,video/x-m4v" multiple hidden>
+        </div>
+
+        <div class="controls-row">
+          <label class="field">
+            Factor de inflado (×<span id="multLabel">10</span>)
+            <input id="mult" type="range" min="2" max="20" step="1" value="10">
+          </label>
+          <div class="btn-group">
+            <button id="patchBtn" class="btn primary" type="button" disabled>Parchear cola</button>
+            <button id="cancelBtn" class="btn danger" type="button" hidden>Cancelar</button>
+            <button id="clearBtn" class="btn ghost" type="button" disabled>Limpiar</button>
+          </div>
+        </div>
+
+        <div id="queue" class="queue" hidden></div>
+
+        <progress id="bar" max="100" value="0" hidden></progress>
+        <pre id="out" class="log">Arrastra vídeos o selecciónalos. El parche es el mismo módulo que usa la app de escritorio.</pre>
+
+        <div class="actions-row">
+          <a id="tiktokStudio" class="btn success" href="https://www.tiktok.com/tiktokstudio/upload" target="_blank" rel="noopener">Abrir TikTok Studio</a>
+        </div>
+      </div>
+
+      <div class="card secondary" id="historyCard">
+        <div class="history-header">
+          <h3>Historial <span id="historyBadge" class="badge muted">0</span></h3>
+          <button id="clearHistoryBtn" class="btn ghost small" type="button">Vaciar historial</button>
+        </div>
+        <div id="historyList" class="history-list">
+          <p class="muted small">Los vídeos parcheados se guardan aquí (IndexedDB) para volver a descargarlos.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TAB: Salud de publicación ===== -->
+    <section id="panel-salud" class="panel" role="tabpanel" hidden>
+      <div class="card">
+        <h2>Salud de publicación <span class="badge">TikTok</span></h2>
+        <p class="lead">Chequeo previo basado en factores documentados por TikTok. No evita la moderación servidora, pero reduce errores comunes que terminan en «Solo yo».</p>
+
+        <div class="form-grid">
+          <label class="field">
+            Origen del audio
+            <select id="audioSource">
+              <option value="propia">Audio propio o sin música</option>
+              <option value="tiktok">Biblioteca con licencia de TikTok</option>
+              <option value="libre">Música libre de derechos externa</option>
+              <option value="comercial">Música / efectos comerciales (copyright)</option>
+            </select>
+          </label>
+          <label class="field checkbox"><input type="checkbox" id="noblurApplied"> Ya apliqué el parche NoBlur</label>
+          <label class="field checkbox"><input type="checkbox" id="metadataClean" checked> Metadatos limpios</label>
+          <label class="field checkbox"><input type="checkbox" id="heavyObfuscation"> Usé ofuscación avanzada (DCT / espacial / croma)</label>
+        </div>
+
+        <h3 class="sub">Checklist de verificación</h3>
+        <div id="checks" class="checks"></div>
+        <button id="assessBtn" class="btn primary" type="button">Evaluar riesgo</button>
+        <div id="result" class="result" hidden></div>
+      </div>
+    </section>
+
+    <!-- ===== TAB: Info ===== -->
+    <section id="panel-info" class="panel" role="tabpanel" hidden>
+      <div class="card">
+        <h2>Sobre SzVideo</h2>
+        <p>Editor de vídeo de escritorio (Electron) + herramientas web locales para autores de contenido propio.</p>
+        <ul class="checklist">
+          <li>Biblioteca de medios + timeline</li>
+          <li>Limpieza de metadatos y capas sutiles de audio/vídeo</li>
+          <li>Preset compatible con TikTok Studio</li>
+          <li>Parche NoBlur sin re-encode (esta web)</li>
+          <li>Director heurístico local + ofuscación avanzada</li>
+          <li>Chequeo de Salud de publicación</li>
+        </ul>
+        <div class="cta-row">
+          <a class="btn primary" href="https://github.com/TU-USUARIO/SzVideo" target="_blank" rel="noopener">App de escritorio / repositorio</a>
+        </div>
+      </div>
+      <div class="card secondary">
+        <h3>Aviso</h3>
+        <p>Diseñado para contenido propio. Las transformaciones son creativas y sutiles. Respeta los Términos de Servicio de cada plataforma. El estado «Solo yo» lo decide la moderación de TikTok.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>SzVideo · procesamiento 100 % local · inspirado en técnicas de densidad de contenedor · <a href="https://github.com/TU-USUARIO/SzVideo">escritorio</a></p>
+  </footer>
+
+  <script type="module" src="web-app.js"></script>
+</body>
+</html>
